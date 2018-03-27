@@ -1,10 +1,12 @@
-﻿using ApiDatabaseTut.Models;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ApiDatabaseTut.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace ApiDatabaseTut.Controllers
 {
@@ -13,9 +15,9 @@ namespace ApiDatabaseTut.Controllers
     [EnableCors("FrontEnd")]
     public class TodoItemsController : Controller
     {
-        private readonly ToDoContext _context;
+        private readonly TodoContext _context;
 
-        public TodoItemsController(ToDoContext context)
+        public TodoItemsController(TodoContext context)
         {
             _context = context;
         }
@@ -50,6 +52,7 @@ namespace ApiDatabaseTut.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTodoItem([FromRoute] int id, [FromBody] TodoItem todoItem)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

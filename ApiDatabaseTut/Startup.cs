@@ -23,10 +23,13 @@ namespace ApiDatabaseTut
             services.AddCors(options =>
             {
                 options.AddPolicy("FrontEnd",
-                    builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+                    builder => builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod());
             });
             services.AddMvc();
-            services.AddDbContext<ToDoContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<TodoContext>(options => options.UseSqlServer(connection));
 
         }
 

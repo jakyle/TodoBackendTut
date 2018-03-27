@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ApiDatabaseTut.Models
 {
-    public partial class ToDoContext : DbContext
+    public partial class TodoContext : DbContext
     {
         public virtual DbSet<TodoItem> TodoItem { get; set; }
 
-        public ToDoContext(DbContextOptions<ToDoContext> options)
+        public TodoContext(DbContextOptions<TodoContext> options)
             : base(options)
         { }
 
@@ -14,9 +16,7 @@ namespace ApiDatabaseTut.Models
         {
             modelBuilder.Entity<TodoItem>(entity =>
             {
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Description).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
